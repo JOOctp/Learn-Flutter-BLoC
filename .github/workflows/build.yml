@@ -1,0 +1,28 @@
+# Note: In a yml each level is padded by 2 spaces
+name: Flutter
+
+on:
+  # Runs this action when you push on master
+  push:
+    branches: [ "master" ]
+  # Runs this when a PR against master is created
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Flutter
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version : '3.4.4'
+          channel: 'stable'
+
+      - name: Install dependencies
+      - run: flutter pub get
+
+      # - name: Build
+      # - run: flutter build
