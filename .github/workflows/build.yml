@@ -1,5 +1,5 @@
 # Note: In a yml each level is padded by 2 spaces
-name: Flutter
+name: Flutter Build
 
 on:
   # Runs this action when you push on master
@@ -10,19 +10,26 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  flutter_job:
+
+    # The machine, we can also use windows-latest or ubuntu-latest
+    # We are choosing macos-latest because we will be also building for iOS
+    runs-on: macos-latest
+
     steps:
+
+      # Clones the project on the machine
       - uses: actions/checkout@v4
 
-      - name: Set up Flutter
-      - uses: subosito/flutter-action@v2
+      # Installs flutter and related dependency on this machine
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
         with:
-          flutter-version : '3.4.4'
           channel: 'stable'
-
+          flutter-version: '3.4.4'
+          # ^ If you want to use a specific version of flutter
+      
+      # Fetches proj dependencies from pub
       - name: Install dependencies
-      - run: flutter pub get
-
-      # - name: Build
-      # - run: flutter build
+        run: flutter pub get
+          # ^ If you want to use a specific version of flutter
