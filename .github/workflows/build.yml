@@ -38,3 +38,6 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
           # ^ If you want to use a specific version of flutter
+
+      - name: Build APK
+        run: flutter build apk --release
